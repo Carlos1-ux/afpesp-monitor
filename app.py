@@ -1,10 +1,18 @@
-from flask import Flask
+import datetime
 
-app = Flask(__name__)
+def selecionar_periodo():
+    data_inicial = input("Digite a data inicial (dd/mm/aaaa): ")
+    data_final = input("Digite a data final (dd/mm/aaaa): ")
 
-@app.route("/")
-def home():
-    return "Monitor AFPESP funcionando! Agora vamos completar o código todo."
+    try:
+        d1 = datetime.datetime.strptime(data_inicial, "%d/%m/%Y")
+        d2 = datetime.datetime.strptime(data_final, "%d/%m/%Y")
+        
+        if d1 > d2:
+            print("A data inicial não pode ser maior que a final.")
+        else:
+            print(f"Período selecionado: {data_inicial} até {data_final}")
+    except:
+        print("Formato inválido. Use dd/mm/aaaa.")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+selecionar_periodo()
